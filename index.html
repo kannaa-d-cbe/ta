@@ -21,7 +21,7 @@
  </div>
  <div class="row">
   <div class="col-12">
-   <div contenteditable virtualkeyboardpolicy="manual" inputmode="text" >click to edit.</div>
+    <div id="tlv" contenteditable virtualkeyboardpolicy="manual" inputmode="text" onclick="navigator.virtualKeyboard.hide()" ondblclick="navigator.virtualKeyboard.hide();">அ</div>
    <table class="table table-responsive-sm text-center">
     <thead class="thead-light">
     <tr><th>ஃ</th><th>அ</th><th>ஆ</th><th>இ</th><th>ஈ</th><th>உ</th><th>ஊ</th><th>எ</th><th>ஏ</th><th>ஐ</th><th>ஒ</th><th>ஓ</th><th>ஔ</th></tr>
@@ -70,7 +70,8 @@
     //jQuery("textarea").focus();
     //jQuery("textarea").val(jQuery("textarea").val() + jQuery(this).text() ).focus();
     var obj=document.getElementById("q");
-    obj.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");
+    /*obj.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");*/
+    tlv.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");
 
 
   });

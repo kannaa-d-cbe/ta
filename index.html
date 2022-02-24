@@ -53,19 +53,15 @@
  const activeEle = document.activeElement;
  jQuery(document).ready(function(){
   jQuery("textarea").focus();
-  jQuery("textarea").on("click",function(){
-    console.log("Click");
-    navigator.virtualKeyboard.show();
-  })
-  if ('virtualKeyboard' in navigator) {
-  // The VirtualKeyboard API is supported!
-    console.log("Yes");
-    navigator.virtualKeyboard.overlaysContent = true;
-    navigator.virtualKeyboard.addEventListener('geometrychanged', (event) => {
-      const { x, y, width, height } = event.target;
-      console.log('Virtual keyboard geometry changed:', x, y, width, height);
-    });
-  }
+
+  jQuery("textarea").focusin(function(){
+    
+    if ('virtualKeyboard' in navigator) {
+      navigator.virtualKeyboard.overlaysContent = false;
+      navigator.virtualKeyboard.hide();
+    }
+
+  });
   jQuery("tbody th,tbody td").on("click",function(e){
     var r=jQuery(this).parent().index();
     var c=jQuery(this).index();
@@ -74,7 +70,7 @@
     //jQuery("textarea").val(jQuery("textarea").val() + jQuery(this).text() ).focus();
     var obj=document.getElementById("q");
     obj.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");
-    
+
 
   });
  });

@@ -16,12 +16,11 @@
 ,<div class="container-fluid">
  <div class="row">
   <div class="col-12">
-    <textarea id="q" class="form-control mb-2" autofocus="true" ></textarea>
+    <textarea id="q" readonly="readonly" class="form-control mb-2" autofocus="true" ></textarea>
   </div>
  </div>
  <div class="row">
   <div class="col-12">
-    <div id="tlv" contenteditable virtualkeyboardpolicy="manual" inputmode="text" onclick="navigator.virtualKeyboard.hide()" ondblclick="navigator.virtualKeyboard.hide();">அ</div>
    <table class="table table-responsive-sm text-center">
     <thead class="thead-light">
     <tr><th>ஃ</th><th>அ</th><th>ஆ</th><th>இ</th><th>ஈ</th><th>உ</th><th>ஊ</th><th>எ</th><th>ஏ</th><th>ஐ</th><th>ஒ</th><th>ஓ</th><th>ஔ</th></tr>
@@ -70,8 +69,7 @@
     //jQuery("textarea").focus();
     //jQuery("textarea").val(jQuery("textarea").val() + jQuery(this).text() ).focus();
     var obj=document.getElementById("q");
-    /*obj.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");*/
-    tlv.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");
+    obj.setRangeText(jQuery(this).text(),activeEle.selectionStart,activeEle.selectionEnd,"select");
 
 
   });

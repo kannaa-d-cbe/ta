@@ -33,7 +33,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text">நகரம்</span>
       </div>
-      <input type="text" class="form-control" id="ta-city" autofocus="true" />
+      <input type="text" class="form-control" id="ta-city" />
       <div class="input-group-append">
         <button class="btn btn-outline-secondary lang-ta" type="button" data-target="ta-city">ஃ</button>
       </div>
@@ -42,9 +42,19 @@
       <div class="input-group-prepend">
         <span class="input-group-text">நாடு</span>
       </div>
-      <input type="text" class="form-control" id="ta-cnty" autofocus="true" />
+      <input type="text" class="form-control" id="ta-cnty" />
       <div class="input-group-append">
         <button class="btn btn-outline-secondary lang-ta" type="button" data-target="ta-cnty">ஃ</button>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">செய்தி</span>
+      </div>
+      <textarea class="form-control" id="ta-msg" rows="2" /></textarea>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary lang-ta" type="button" data-target="ta-msg">ஃ</button>
       </div>
     </div>
 
@@ -97,9 +107,9 @@
       <th class="mey">ஜ</th>
       <th class="mey">ஹ</th>
       <th class="mey">க்ஷ</th>
-      <th>ௐ</th>
-      <th>௳</th>
-      <th>ஸ்ரீ</th>
+      <th class="gl">ௐ</th>
+      <th class="gl">௳</th>
+      <th class="gl">ஸ்ரீ</th>
      </tr>
     </tbody>
   </table>
@@ -111,15 +121,29 @@
     var tin=jQuery("#" + target).parent();
     var tpos=tin.offset();
     var itop = ( parseFloat(tpos.top) + parseFloat(tin.height()) );
+    if(jQuery(this).hasClass('active')){
+      jQuery("#ta-kp").addClass("d-none");
+      jQuery(".lang-ta.active").removeClass("active");
+    }else{
+      jQuery(".lang-ta.active").removeClass("active");
+      jQuery(this).addClass("active");
+      jQuery("#ta-kp").removeClass("d-none");
+    }
+    
 
     /*if( jQuery("#" + target).attr("readonly") ){
       jQuery("#" + target).prop('readonly','');
     }else
       jQuery("#" + target).prop("readonly","readonly");*/
 
+    resetTa();
     jQuery("#" + target).focus();
     jQuery("#ta-kp").data("target","#" + target);
-    jQuery("#ta-kp").toggleClass("d-none").offset({top: itop,left: tpos.left}).css("z-index",9999);
+
+    /*if(jQuery("#ta-kp").hasClass("d-none"))*/
+      
+
+    jQuery("#ta-kp").offset({top: itop,left: tpos.left}).css("z-index",9999);
     jQuery("#ta-kp").width(tin.width());
   });
   jQuery(".mey").on("click",function(e){
@@ -168,13 +192,26 @@
     if(jQuery(this).data("u")==jQuery(this).text() )
       rt=jQuery(this).text();
     obj.setRangeText(rt,activeEle.selectionStart,activeEle.selectionEnd,"end");
+    resetTa();
+   });
+   jQuery(".gl").on("click",function(e){
+    var intp=jQuery("#ta-kp").data("target");
+    jQuery(intp).focus();
+    var obj=document.getElementById(intp.replace('#',''));
+    const activeEle = document.activeElement;
+    var rt=jQuery(this).text();
+    obj.setRangeText(rt,activeEle.selectionStart,activeEle.selectionEnd,"end");
+    resetTa();
+   });
+
+   function resetTa(){
     jQuery("thead th").each(function(index, el) {
       if(jQuery(this).data("u")){
        jQuery(this).text(jQuery(this).data("u"));
       }
     });
     jQuery("tbody th").removeClass("active");
-   });
+   }
  });
 </script>
 </body>
